@@ -1,14 +1,24 @@
 {
   "name": "create-blastra",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "type": "module",
   "description": "Create a new Blastra application",
   "bin": "./index.js",
   "files": [
     "index.js",
-    "template",
+    "template/api-demo/index.js",
+    "template/api-demo/package.json",
+    "template/public",
+    "template/src",
+    "template/.env.example",
+    "template/.prettierrc",
+    "template/.yarnrc.yml",
+    "template/docker-compose.yml",
+    "template/Dockerfile",
+    "template/eslint.config.js",
     "template/gitignore",
-    "template/.vscode"
+    "template/package.json",
+    "template/vite.config.js"
   ],
   "dependencies": {
     "chalk": "^5.3.0",
