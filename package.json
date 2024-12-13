@@ -1,0 +1,28 @@
+{
+  "name": "~blastra-dev",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "go-run": "cd pkg && BLASTRA_CPU_LIMIT=4 BLASTRA_RATE_LIMIT=0 BLASTRA_LOG_LEVEL=debug BLASTRA_CWD=../packages/create/template go run main.go",
+    "release": "commit-and-tag-version"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devthefuture-org/blastra.git"
+  },
+  "keywords": [
+    "blastra",
+    "create-blastra",
+    "template"
+  ],
+  "author": "DevTheFuture",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@4.5.3",
+  "devDependencies": {
+    "commit-and-tag-version": "^12.5.0"
+  }
+}

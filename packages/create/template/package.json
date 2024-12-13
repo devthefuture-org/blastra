@@ -1,0 +1,35 @@
+{
+  "name": "blastra-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "blastra dev",
+    "build": "blastra build",
+    "preview": "blastra preview",
+    "release": "commit-and-tag-version",
+    "release:minor": "yarn release --release-as minor",
+    "release:patch": "yarn release --release-as patch",
+    "release:major": "yarn release --release-as major"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@blastra/core": "^0.1.163"
+  },
+  "devDependencies": {
+    "commit-and-tag-version": "^12.5.0"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "yarn@4.5.3",
+  "license": "MIT"
+}

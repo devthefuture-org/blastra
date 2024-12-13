@@ -1,0 +1,32 @@
+{
+  "name": "create-blastra",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Create a new Blastra application",
+  "bin": "./index.js",
+  "files": [
+    "index.js",
+    "template",
+    "template/gitignore",
+    "template/.vscode"
+  ],
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "prompts": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devthefuture-org/blastra.git"
+  },
+  "keywords": [
+    "blastra",
+    "create-blastra",
+    "template"
+  ],
+  "author": "DevTheFuture",
+  "license": "MIT"
+}

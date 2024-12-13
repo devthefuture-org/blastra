@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - MODULE_PATH=github.com/devthefuture-org/blastra
+        - MODULE_VERSION=latest
+        - GO_BUILD_FLAGS=""
+    ports:
+      - "8080:8080"
+    environment:
+      - BLASTRA_EXTERNAL_CACHE_TYPE=${BLASTRA_EXTERNAL_CACHE_TYPE:-redis}
+      - BLASTRA_REDIS_URL=${BLASTRA_REDIS_URL:-redis:6379}
+      - BLASTRA_SITE_URL=${BLASTRA_SITE_URL:-http://localhost:8080}
+    user: "1000:1000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.2.6-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: >
+      sh -c '
+      mkdir -p /data &&
+      chown -R redis:redis /data &&
+      redis-server --appendonly yes
+      '
+
+volumes:
+  redis_data:
+    driver: local
+
+# Note: For optimal Redis performance, ensure your host system has memory overcommit enabled:
+# sudo sysctl vm.overcommit_memory=1
