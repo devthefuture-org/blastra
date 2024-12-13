@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "bin": {
-    "blastra": "./bin/cli.cjs"
+    "blastra": "bin/cli.cjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.3.4",
