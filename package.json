@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "go-run": "cd pkg && BLASTRA_CPU_LIMIT=4 BLASTRA_RATE_LIMIT=0 BLASTRA_LOG_LEVEL=debug BLASTRA_CWD=../packages/create/template go run main.go",
-    "release": "commit-and-tag-version"
+    "release": "commit-and-tag-version",
+    "publish-packages": "cd packages/core && npm publish --access public && cd ../create && npm publish --access public"
   },
   "engines": {
     "node": ">=20"
