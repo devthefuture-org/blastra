@@ -28,5 +28,6 @@
     "template"
   ],
   "author": "DevTheFuture",
-  "license": "MIT"
+  "license": "MIT",
+  "private": false
 }
