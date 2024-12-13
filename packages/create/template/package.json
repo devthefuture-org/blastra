@@ -22,7 +22,7 @@
     ]
   },
   "dependencies": {
-    "@blastra/core": "^0.0.2"
+    "@blastra/core": "^0.0.1"
   },
   "devDependencies": {
     "commit-and-tag-version": "^12.5.0"
