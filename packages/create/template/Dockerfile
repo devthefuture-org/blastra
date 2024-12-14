@@ -23,7 +23,7 @@ FROM golang:1.22-alpine AS go-builder
 
 # Build arguments for Go module
 ARG MODULE_PATH=github.com/devthefuture-org/blastra
-ARG MODULE_VERSION=latest
+ARG MODULE_VERSION=main
 ARG GO_BUILD_FLAGS=""
 
 WORKDIR /app
