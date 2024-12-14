@@ -102,7 +102,7 @@ export default function Home({ data }) {
       </div>
       <div style={{ textAlign: "center" }}>
         <Link
-          href="/fail"
+          href="/about"
           style={{
             textDecoration: "none",
             color: "#6c757d",

@@ -79,7 +79,6 @@ my-blastra-app
 │       │   ├── index.jsx
 │       │   └── meta.js
 │       ├── data.js
-│       ├── fail/
 │       ├── index.jsx
 │       ├── meta.js
 │       └── project/
