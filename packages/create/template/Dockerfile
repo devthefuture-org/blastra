@@ -8,7 +8,7 @@ COPY yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
 
 # Use yarn fetch for optimized dependency installation
-RUN yarn fetch --immutable
+RUN yarn fetch
 
 # Copy the rest of the source files
 COPY . .
