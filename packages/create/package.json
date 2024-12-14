@@ -3,7 +3,9 @@
   "version": "0.0.4",
   "type": "module",
   "description": "Create a new Blastra application",
-  "bin": "./index.js",
+  "bin": {
+    "create-blastra": "index.js"
+  },
   "files": [
     "index.js",
     "template/api-demo/index.js",
