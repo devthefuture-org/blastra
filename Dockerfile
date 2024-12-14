@@ -5,7 +5,7 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 
-COPY . .
+COPY pkg ./pkg
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o blastra-server ./pkg/main.go
 

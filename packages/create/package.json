@@ -11,6 +11,7 @@
     "template/public",
     "template/src",
     "template/.env.example",
+    "template/.nvmrc",
     "template/.prettierrc",
     "template/.yarnrc.yml",
     "template/docker-compose.yml",
