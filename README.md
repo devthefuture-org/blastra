@@ -1,4 +1,9 @@
 # ⚡️ BLASTRA ✴️
+
+<p align="center">
+  <img src="docs/assets/blastra_logo.png" width="200" alt="Blastra Logo">
+</p>
+
 Fast. Reliable. Stellar.
 
 Blastra is an **opinionated SSR (Server-Side Rendering) React framework** built on top of **Vite.js**. It combines file-based routing, isomorphic data loading, and optional high-performance Go server deployments to provide a straightforward and scalable solution for building SEO-friendly React web applications.
@@ -55,7 +60,7 @@ The easiest way to create a new Blastra project is with npx:
 npx create-blastra
 ```
 
-This command scaffolds a new project with sensible defaults. You’ll get a directory structure like:
+This command scaffolds a new project with sensible defaults. You'll get a directory structure like:
 
 ```kotlin
 my-blastra-app
@@ -110,7 +115,7 @@ docker compose build app
 
 ### File-Based Routing
 
-Blastra automatically creates routes based on the folder and file structure under `src/pages`. Here’s how it works:
+Blastra automatically creates routes based on the folder and file structure under `src/pages`. Here's how it works:
 
 * **`src/pages/index.jsx`** → Renders at the root path `/`.
 * **`src/pages/about/index.jsx`** → Renders at `/about`.
@@ -171,7 +176,7 @@ export async function loader() {
 **Key Points**:
 
 * **Isomorphic**: Use the same `fetch` code for both SSR and client side.
-* The return value of `loader()` is passed to the corresponding page component’s `props.data` on SSR. On the client, the framework calls `loader()` again during navigation to fetch data.
+* The return value of `loader()` is passed to the corresponding page component's `props.data` on SSR. On the client, the framework calls `loader()` again during navigation to fetch data.
 
 ### fieldsConfig for Hydration Optimization
 
@@ -226,13 +231,13 @@ export async function loader({ params }) {
 
 ### No Query Param SSR Logic
 
-Blastra **does not** handle query parameters on the server side. Only path-based routing is SSR’d (use dynamic routes if needed). Query params logic runs on the **client side**.
+Blastra **does not** handle query parameters on the server side. Only path-based routing is SSR'd (use dynamic routes if needed). Query params logic runs on the **client side**.
 
 * * *
 
 ## 5. Hydration & Avoiding Duplicate Payloads
 
-By default, SSR includes an inline JSON hydration script containing the page’s data. If some fields are large (e.g., big HTML blocks), you can instruct Blastra to **omit** them from the JSON blob and pick them up from the DOM directly.
+By default, SSR includes an inline JSON hydration script containing the page's data. If some fields are large (e.g., big HTML blocks), you can instruct Blastra to **omit** them from the JSON blob and pick them up from the DOM directly.
 
 ```js
 export const fieldsConfig = {
@@ -271,7 +276,7 @@ The Go server supports multiple caching layers:
 
 1. **In-Memory** SSR Cache: Speeds up repeated SSR requests for the same route/data.
 2. **Redis** or **Filesystem** External Cache: For distributed or persistent caching.
-3. **NotFound Cache**: Specifically caches 404 pages to quickly serve repeated “not found” routes.
+3. **NotFound Cache**: Specifically caches 404 pages to quickly serve repeated "not found" routes.
 
 All caches have configurable TTL and max size, and can be layered for robust performance under heavy load.
 
@@ -287,7 +292,7 @@ All caches have configurable TTL and max size, and can be layered for robust per
 
 ### Vite Plugins
 
-In `@blastra/core`, you’ll find custom Vite plugins:
+In `@blastra/core`, you'll find custom Vite plugins:
 
 * **`virtual-blastra`** plugin: Provides virtual modules that tie together client and server entry points (`entry-client.jsx` / `entry-server.jsx`) for SSR.
 * **`fallback`** plugin: Fallbacks certain special pages (`_head`, `_404`, etc.) to core defaults if not defined in your project.
@@ -332,9 +337,9 @@ A: Just run `yarn build && yarn start` on Node. The Go server is optional. For m
 
 ## 9. Further Reading & Contributing
 
-Check out the **Blastra** repository or your new project’s codebase for deeper exploration. The `packages/core` folder shows the SSR system, router, and build scripts. The `pkg/` folder contains the optional Go server, caching logic, and advanced SSR server infrastructure.
+Check out the **Blastra** repository or your new project's codebase for deeper exploration. The `packages/core` folder shows the SSR system, router, and build scripts. The `pkg/` folder contains the optional Go server, caching logic, and advanced SSR server infrastructure.
 
-**Contributions** are welcome. Feel free to open issues or pull requests if you want to extend or improve Blastra’s capabilities.
+**Contributions** are welcome. Feel free to open issues or pull requests if you want to extend or improve Blastra's capabilities.
 
 * * *
 
