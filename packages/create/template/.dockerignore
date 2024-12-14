@@ -1,0 +1,54 @@
+# Version Control
+.git
+.gitignore
+
+# Go specific
+*.test
+*.out
+/vendor/
+coverage.txt
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build and binary files
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test files
+*_test.go
+testdata/
+
+# Local development
+.env*
+*.log
+tmp/
+temp/
+
+# Docker related
+docker-compose*.yml
+Dockerfile*
+.docker/
+
+# Documentation
+*.md
+docs/
+
+# Misc
+.DS_Store
+*.pprof
+*.cpu
+*.mem
+*.trace
+
+# Project specific
+.aidigestignore
+Makefile
