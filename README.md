@@ -49,10 +49,10 @@ Blastra is an **opinionated SSR (Server-Side Rendering) React framework** built 
 
 ### Project Creation
 
-The easiest way to create a new Blastra project is with Yarn:
+The easiest way to create a new Blastra project is with npx:
 
 ```bash
-yarn create blastra
+npx create-blastra
 ```
 
 This command scaffolds a new project with sensible defaults. You’ll get a directory structure like:
