@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@blastra/core": "^0.0.5"
+    "@blastra/core": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

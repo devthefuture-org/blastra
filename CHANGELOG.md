@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.6](https://github.com/devthefuture-org/blastra/compare/v0.0.5...v0.0.6) (2024-12-15)
+
+
+### Bug Fixes
+
+* template lint ([c4713f8](https://github.com/devthefuture-org/blastra/commit/c4713f80ee4cb9fface373a59c73fa3f9284113e))
+
 ## [0.0.5](https://github.com/devthefuture-org/blastra/compare/v0.0.4...v0.0.5) (2024-12-14)
 
 ## [0.0.4](https://github.com/devthefuture-org/blastra/compare/v0.0.3...v0.0.4) (2024-12-14)
