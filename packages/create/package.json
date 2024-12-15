@@ -8,8 +8,6 @@
   },
   "files": [
     "index.js",
-    "template/api-demo/index.js",
-    "template/api-demo/package.json",
     "template/public",
     "template/src",
     "template/.env.example",

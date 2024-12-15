@@ -5,7 +5,7 @@ export default function About({ data }) {
     <div>
       <h1>{data.title}</h1>
       <p>{data.description}</p>
-      <div id="team-info">{data.teamInfo}</div>
+      <pre id="team-info">{data.teamInfo}</pre>
       <Link href="/">Home</Link>
     </div>
   )

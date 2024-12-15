@@ -1,5 +1,3 @@
-import { API_URL } from "../config.js"
-
 export const fieldsConfig = {
   content: {
     hydrateFunction: () => document.getElementById("home-content").innerHTML,
@@ -7,7 +5,9 @@ export const fieldsConfig = {
 }
 
 export async function loader() {
-  const response = await fetch(`${API_URL}/`)
-  const data = await response.json()
-  return data
+  return {
+    title: "Welcome to Blastra Template",
+    description: "This is the home page",
+    content: `"When you let go of what you are, you become what you might be." Lao Tzu`,
+  }
 }

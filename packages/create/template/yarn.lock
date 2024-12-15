@@ -311,21 +311,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blastra/core@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@blastra/core@npm:0.0.6"
+"@blastra/core@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@blastra/core@npm:0.0.7"
   dependencies:
     "@vitejs/plugin-react": "npm:^4.3.4"
     commander: "npm:^12.1.0"
     express: "npm:^4.21.2"
-    react: "npm:^19.0.0"
-    react-dom: "npm:^19.0.0"
     serialize-error: "npm:^11.0.3"
     vite: "npm:^6.0.3"
     wouter: "npm:^3.0.0"
+  peerDependencies:
+    react: ^19.0.0
+    react-dom: ^19.0.0
   bin:
     blastra: bin/cli.cjs
-  checksum: 10c0/c4461f2f84bfaa6debd697d77ea7d1c588ef288cbcb71f09cc5d0eca85f226466d10a2d639d7074e0b9ed9979a13ca86db337a6ef5b13f2e7c132ba47858f891
+  checksum: 10c0/425233eac7dda055ccdb727cbfb15a5e6b5ed101c25ab7b83669891c63c0d0fe2ebebbdf585d1d3b7aa4a1d3945d1216e9609f0f57fb5c7754893b25cb3c2152
   languageName: node
   linkType: hard
 
@@ -1217,7 +1218,7 @@ __metadata:
     "@babel/core": "npm:^7.26.0"
     "@babel/eslint-parser": "npm:^7.25.9"
     "@babel/preset-react": "npm:^7.26.3"
-    "@blastra/core": "npm:^0.0.6"
+    "@blastra/core": "npm:^0.0.7"
     commit-and-tag-version: "npm:^12.5.0"
     eslint: "npm:^9.17.0"
     eslint-config-prettier: "npm:^9.1.0"

@@ -5,7 +5,7 @@ export default function Project({ data }) {
     <div>
       <h1>{data.title}</h1>
       <p>{data.description}</p>
-      <div id="project-content">{data.content}</div>
+      <pre id="project-content">{data.content}</pre>
       <Link href="/">Home</Link>
     </div>
   )

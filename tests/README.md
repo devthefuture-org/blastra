@@ -131,10 +131,10 @@ Response Time Comparison:
 ------------------------------------------------------------------------------------------------------------------
 Metric          | Next.js      | Blastra Node | Blastra Go   | Blastra Node vs Next     | Blastra Go vs Next
 --------------- | ------------ | ------------ | ------------ | ------------------------ | ---------------------
-Average         | 6.22ms       | 2.81ms       | 2.83ms       | 54.8% faster (2.2x)      | 54.5% faster (2.2x)
-Median          | 4.33ms       | 2.08ms       | 1.23ms       | 52.1% faster (2.1x)      | 71.6% faster (3.5x)
-95th Percentile | 14.22ms      | 5.38ms       | 6.12ms       | 62.1% faster (2.6x)      | 56.9% faster (2.3x)
-Maximum         | 136.93ms     | 18.33ms      | 96.09ms      | 86.6% faster (7.5x)      | 29.8% faster (1.4x)
+Average         | 168.83ms     | 164.90ms     | 2.11ms       | 2.3% faster (1.0x)       | 98.7% faster (80.0x)
+Median          | 139.78ms     | 143.72ms     | 686.25µs     | 2.8% slower (1.0x)       | 99.5% faster (203.7x)
+95th Percentile | 296.45ms     | 294.69ms     | 1.12ms       | 0.6% faster (1.0x)       | 99.6% faster (264.2x)
+Maximum         | 846.94ms     | 814.96ms     | 814.64ms     | 3.8% faster (1.0x)       | 3.8% faster (1.0x)
 ```
 
 ### Metric Explanations
