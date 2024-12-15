@@ -14,7 +14,7 @@ RUN yarn fetch
 COPY . .
 
 # Build the application
-RUN yarn postinstall
+RUN yarn workspaces foreach -At run postinstall
 RUN yarn build
 RUN yarn workspaces focus --production && yarn cache clean
 
