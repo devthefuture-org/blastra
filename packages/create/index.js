@@ -193,7 +193,7 @@ ${chalk.bold("🐳 Docker Deployment:")}
     ${chalk.cyan("docker build -t my-blastra-app .")}
   
   Launch into orbit:
-    ${chalk.cyan("docker run -p 3000:3000 my-blastra-app")}
+    ${chalk.cyan("docker run -p 8080:8080 my-blastra-app")}
   
   Your app will be optimized with our Go-powered stellar engine! 🚀
 
