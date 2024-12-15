@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => ({
     alias,
   },
   ssr: {
-    noExternal: ["wouter"],
+    noExternal: ["wouter", "@blastra/core/router"],
     target: "node",
     format: "esm",
   },
