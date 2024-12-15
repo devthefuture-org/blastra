@@ -111,20 +111,22 @@ async function main() {
 
   try {
     switch (command) {
-      case 'dev':
+      case 'dev': {
         logger.info('🔥 Starting development server...');
         await spawnAsync('node', [path.join(coreRoot, 'server.js')], {
           stdio: 'inherit',
           env: { ...process.env, NODE_ENV: 'development' }
         });
         break;
+      }
 
-      case 'build:client':
+      case 'build:client': {
         logger.info('📦 Building client bundle...');
         await spawnAsync('vite', ['build'], { stdio: 'inherit' });
         break;
+      }
 
-      case 'build:server':
+      case 'build:server': {
         logger.info('📦 Building server bundle...');
         await spawnAsync('vite', [
           'build',
@@ -134,21 +136,25 @@ async function main() {
           'dist/server'
         ], { stdio: 'inherit' });
         break;
+      }
 
-      case 'build':
+      case 'build': {
         await handleBuild();
         break;
+      }
 
-      case 'start':
+      case 'start': {
         await handleStart();
         break;
+      }
       
-      case 'preview':
+      case 'preview': {
         await handleBuild();
         await handleStart();
         break;
+      }
 
-      case 'render':
+      case 'render': {
         const url = args[1];
         if (!url) {
           logger.error('Please specify a URL to render');
@@ -161,11 +167,13 @@ async function main() {
           stdio: 'inherit'
         });
         break;
+      }
 
-      default:
+      default: {
         logger.error(`Unknown command: ${command}`);
         logger.info('💡 Run "blastra --help" for usage information');
         process.exit(1);
+      }
     }
   } catch (error) {
     logger.error('Command execution failed:', error.message);

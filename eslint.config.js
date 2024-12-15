@@ -5,9 +5,23 @@ import prettier from "eslint-plugin-prettier"
 import * as parser from "@babel/eslint-parser"
 
 export default [
+  {
+    ignores: [
+      "**/dist/**",
+      "**/build/**",
+      "tests/**",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/coverage/**",
+      "**/tmp/**",
+      "**/vendor/**",
+      "packages/*/dist/**",
+      "packages/*/build/**",
+    ],
+  },
   js.configs.recommended,
   {
-    files: ["src/**/*.{js,jsx,ts,tsx}"],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     plugins: { react, "react-hooks": reactHooks, prettier },
     languageOptions: {
       parser,
@@ -50,20 +64,40 @@ export default [
     settings: {
       react: {
         version: "detect",
+        "jsx-runtime": true,
       },
     },
     rules: {
       "prettier/prettier": "error",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
+      "react/jsx-uses-vars": "error",
+      "react/jsx-uses-react": "error",
       "no-unused-vars": [
         "error",
         {
-          varsIgnorePattern: "^_|^Link$",
+          varsIgnorePattern: "^_",
           argsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          caughtErrors: "none",
         },
       ],
       "no-empty": ["error", { allowEmptyCatch: true }],
+      "no-case-declarations": "off",
+    },
+  },
+  {
+    files: ["**/*.cjs"],
+    languageOptions: {
+      sourceType: "commonjs",
+      globals: {
+        __dirname: true,
+        process: true,
+        console: true,
+        require: true,
+        module: true,
+        exports: true,
+      },
     },
   },
 ]

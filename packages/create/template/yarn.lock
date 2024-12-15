@@ -1227,6 +1227,8 @@ __metadata:
     husky: "npm:^9.1.7"
     lint-staged: "npm:^15.2.11"
     prettier: "npm:^3.4.2"
+    react: "npm:^19.0.0"
+    react-dom: "npm:^19.0.0"
   languageName: unknown
   linkType: soft
 

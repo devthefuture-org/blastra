@@ -1,8 +1,8 @@
-import { hydrateRoot } from 'react-dom/client'
-import App from './components/App'
+import { hydrateRoot } from "react-dom/client"
+import App from "./components/App"
 
 // Disable HMR in production
-if (import.meta.hot && process.env.NODE_ENV !== 'production') {
+if (import.meta.hot && process.env.NODE_ENV !== "production") {
   import.meta.hot.accept()
 }
 
@@ -10,7 +10,7 @@ export function hydrate({ router }) {
   const { data: initialData, fieldHydrators, statusCode } = window.__BLASTRA_HYDRATION__
 
   // Process field hydrators
-  for(const [key, hydrator] of Object.entries(fieldHydrators)) {
+  for (const [key, hydrator] of Object.entries(fieldHydrators)) {
     if (hydrator.func) {
       // Execute hydration function
       const fn = new Function(`return ${hydrator.func}`)()
@@ -25,7 +25,12 @@ export function hydrate({ router }) {
   }
 
   hydrateRoot(
-    document.getElementById('app'),
-    <App router={router} url={window.location.pathname} initialData={initialData} statusCode={statusCode} />
+    document.getElementById("app"),
+    <App
+      router={router}
+      url={window.location.pathname}
+      initialData={initialData}
+      statusCode={statusCode}
+    />
   )
 }

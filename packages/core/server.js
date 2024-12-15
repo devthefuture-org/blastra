@@ -1,68 +1,72 @@
-import express from 'express'
-import { createServer as createViteServer } from 'vite'
-import { resolve } from 'path'
+import express from "express"
+import { createServer as createViteServer } from "vite"
+import { resolve } from "path"
 
 import render from "./render.js"
 
 async function createServer() {
   const app = express()
-  const isProd = process.env.NODE_ENV === 'production'
+  const isProd = process.env.NODE_ENV === "production"
 
   let vite
   if (!isProd) {
     vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: 'custom'
+      appType: "custom",
     })
     app.use(vite.middlewares)
-  } else {    
-    app.use(express.static(resolve(process.cwd(), 'dist/client'), {
-      index: false
-    }))
+  } else {
+    app.use(
+      express.static(resolve(process.cwd(), "dist/client"), {
+        index: false,
+      })
+    )
   }
 
-  app.use('*', async (req, res, next) => {
+  app.use("*", async (req, res, next) => {
     const url = req.originalUrl
     try {
       let finalHtml, statusCode
-      if(isProd){
+      if (isProd) {
         const result = await render({ url })
         finalHtml = result.html
         statusCode = result.statusCode
       } else {
-        const { render: devRender } = await vite.ssrLoadModule('virtual:blastra/entry-server.jsx')
+        const { render: devRender } = await vite.ssrLoadModule("virtual:blastra/entry-server.jsx")
         const result = await devRender({ url })
-        finalHtml = await vite.transformIndexHtml(url, '<!DOCTYPE html>' + result.html)
+        finalHtml = await vite.transformIndexHtml(url, "<!DOCTYPE html>" + result.html)
         statusCode = result.statusCode
       }
 
-      res.status(statusCode || 200)
-        .set({ 'Content-Type': 'text/html' })
+      res
+        .status(statusCode || 200)
+        .set({ "Content-Type": "text/html" })
         .end(finalHtml)
-
     } catch (e) {
       if (!isProd && vite) {
         vite.ssrFixStacktrace(e)
       }
-      console.error('SSR error:', e)
+      console.error("SSR error:", e)
       next(e)
     }
   })
 
   const port = process.env.PORT || 5173
-  
+
   // Store active connections
   const connections = new Set()
-  
+
   // Create HTTP server instance
   const server = app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port} (${isProd ? 'production' : 'development'} mode)`)
+    console.log(
+      `Server running at http://localhost:${port} (${isProd ? "production" : "development"} mode)`
+    )
   })
 
   // Track connections
-  server.on('connection', (connection) => {
+  server.on("connection", (connection) => {
     connections.add(connection)
-    connection.on('close', () => {
+    connection.on("close", () => {
       connections.delete(connection)
     })
   })
@@ -74,7 +78,7 @@ async function createServer() {
     // Stop accepting new connections
     server.close(async (err) => {
       if (err) {
-        console.error('Error during server shutdown:', err)
+        console.error("Error during server shutdown:", err)
         process.exit(1)
       }
 
@@ -82,9 +86,9 @@ async function createServer() {
       if (!isProd && vite) {
         try {
           await vite.close()
-          console.log('Vite dev server closed')
+          console.log("Vite dev server closed")
         } catch (error) {
-          console.error('Error closing Vite server:', error)
+          console.error("Error closing Vite server:", error)
         }
       }
 
@@ -93,20 +97,20 @@ async function createServer() {
         connection.destroy()
       }
 
-      console.log('Graceful shutdown completed')
+      console.log("Graceful shutdown completed")
       process.exit(0)
     })
 
     // Force shutdown after 10 seconds
     setTimeout(() => {
-      console.error('Forced shutdown after timeout')
+      console.error("Forced shutdown after timeout")
       process.exit(1)
     }, 10000)
   }
 
   // Handle shutdown signals
-  process.on('SIGTERM', () => gracefulShutdown('SIGTERM'))
-  process.on('SIGINT', () => gracefulShutdown('SIGINT'))
+  process.on("SIGTERM", () => gracefulShutdown("SIGTERM"))
+  process.on("SIGINT", () => gracefulShutdown("SIGINT"))
 
   return { server, vite }
 }

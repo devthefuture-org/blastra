@@ -9,11 +9,13 @@
     "@vitejs/plugin-react": "^4.3.4",
     "commander": "^12.1.0",
     "express": "^4.21.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "serialize-error": "^11.0.3",
     "vite": "^6.0.3",
     "wouter": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "exports": {
     ".": "./src/index.js",
@@ -36,6 +38,5 @@
     "render.js",
     "output.js"
   ],
-  "packageManager": "yarn@4.5.3",
-  "private": false
+  "packageManager": "yarn@4.5.3"
 }

@@ -1,5 +1,5 @@
-import { Router } from 'wouter'
-import PageWrapper from './PageWrapper'
+import { Router } from "wouter"
+import PageWrapper from "./PageWrapper"
 
 export default function App({ url, initialData, router, statusCode }) {
   return (
