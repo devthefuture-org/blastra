@@ -29,20 +29,27 @@ function spawnAsync(...args) {
   });
 }
 
+async function buildClient() {
+  logger.info('📦 Building client bundle...');
+  await spawnAsync('node', ['node_modules/.bin/vite', 'build'], { stdio: 'inherit' });
+}
+
+async function buildServer() {
+  logger.info('📦 Building server bundle...');
+  await spawnAsync('node', [
+    'node_modules/.bin/vite',
+    'build',
+    '--ssr',
+    'virtual:blastra/entry-server.jsx',
+    '--outDir',
+    'dist/server'
+  ], { stdio: 'inherit' });
+}
+
 async function handleBuild() {
   try {
-    logger.info('📦 Building client bundle...');
-    await spawnAsync('vite', ['build'], { stdio: 'inherit' });
-    
-    logger.info('📦 Building server bundle...');
-    await spawnAsync('vite', [
-      'build',
-      '--ssr',
-      'virtual:blastra/entry-server.jsx',
-      '--outDir',
-      'dist/server'
-    ], { stdio: 'inherit' });
-    
+    await buildClient();
+    await buildServer();
     logger.success('Build complete!');
   } catch (error) {
     logger.error('Build failed:', error.message);
@@ -121,20 +128,12 @@ async function main() {
       }
 
       case 'build:client': {
-        logger.info('📦 Building client bundle...');
-        await spawnAsync('vite', ['build'], { stdio: 'inherit' });
+        await buildClient();
         break;
       }
 
       case 'build:server': {
-        logger.info('📦 Building server bundle...');
-        await spawnAsync('vite', [
-          'build',
-          '--ssr',
-          'virtual:blastra/entry-server.jsx',
-          '--outDir',
-          'dist/server'
-        ], { stdio: 'inherit' });
+        await buildServer();
         break;
       }
 

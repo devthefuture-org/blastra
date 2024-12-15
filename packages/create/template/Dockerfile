@@ -14,8 +14,11 @@ RUN yarn fetch
 COPY . .
 
 # Build the application
+ENV NODE_ENV=production
 RUN yarn workspaces foreach -At run postinstall
 RUN yarn build
+
+# Now prune devDependencies for production
 RUN yarn workspaces focus --production && yarn cache clean
 
 # Stage 2: Build Go server
@@ -37,15 +40,17 @@ RUN go install ${BLASTRA_GOSERVER_URL}/pkg@${BLASTRA_GOSERVER_VERSION} ${GO_BUIL
   && mv /go/bin/pkg /go/bin/blastra-server
 
 # Stage 3: Final image
-FROM alpine:latest
+FROM node:20-alpine
 
 USER 1000
 
 WORKDIR /app
 
+ENV NODE_ENV=production
+
 # Copy built assets from Node.js build
-COPY --from=node-builder /app/dist ./dist
-COPY --from=node-builder /app/node_modules ./node_modules
+COPY --from=node-builder --chown=1000:1000 /app/dist ./dist
+COPY --from=node-builder --chown=1000:1000 /app/node_modules ./node_modules
 
 # Copy Go binary from the Go binary path and ensure it's in PATH
 COPY --from=go-builder /go/bin/blastra-server /usr/local/bin/blastra-server

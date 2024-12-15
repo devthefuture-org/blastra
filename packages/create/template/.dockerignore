@@ -28,6 +28,8 @@ coverage.txt
 testdata/
 
 # Local development
+**/dist
+**/node_modules
 .env*
 *.log
 tmp/
