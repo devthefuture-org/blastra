@@ -15,6 +15,7 @@
     "template/.prettierrc",
     "template/.yarnrc.yml",
     "template/.yarn",
+    "template/.gitattributes",
     "template/.dockerignore",
     "template/.husky",
     "template/docker-compose.yml",

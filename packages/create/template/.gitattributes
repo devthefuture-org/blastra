@@ -1,0 +1,8 @@
+/.yarn/releases/** binary
+/.yarn/cache/** binary
+/.yarn/patches/** binary
+/.yarn/plugins/** binary
+/.yarn/sdks/** binary
+/.yarn/versions/** binary
+/.yarn/**/*.js text eol=lf
+/.yarn/**/*.ts text eol=lf
