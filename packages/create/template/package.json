@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@blastra/core": "^0.0.9",
+    "@blastra/core": "^0.0.10",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
