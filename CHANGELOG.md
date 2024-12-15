@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.9](https://github.com/devthefuture-org/blastra/compare/v0.0.8...v0.0.9) (2024-12-15)
+
+
+### Bug Fixes
+
+* **template:** yarn ([f94929f](https://github.com/devthefuture-org/blastra/commit/f94929fd6a2685118cd5f5395eccd53f9dccf3fd))
+
 ## [0.0.8](https://github.com/devthefuture-org/blastra/compare/v0.0.7...v0.0.8) (2024-12-15)
 
 
