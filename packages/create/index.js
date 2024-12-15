@@ -65,24 +65,7 @@ async function initializeGit(targetDir) {
 
 async function initializeHusky(targetDir) {
   try {
-    // Add husky as a dev dependency
-    execSync("yarn add -D husky", { cwd: targetDir, stdio: "inherit" })
-
-    // Add prepare script to package.json
-    const pkgJsonPath = path.join(targetDir, "package.json")
-    const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, "utf8"))
-    pkgJson.scripts = pkgJson.scripts || {}
-    pkgJson.scripts.prepare = "husky"
-    fs.writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + "\n")
-
-    // Create .husky directory and pre-commit hook
     execSync("yarn prepare", { cwd: targetDir, stdio: "inherit" })
-    fs.writeFileSync(
-      path.join(targetDir, ".husky", "pre-commit"),
-      '#!/usr/bin/env sh\n. "$(dirname -- "$0")/_/husky.sh"\n\nyarn lint-staged\n',
-      { mode: 0o755 }
-    )
-
     console.log(chalk.green("✨ Husky hooks initialized"))
     return true
   } catch (_error) {
@@ -149,10 +132,6 @@ async function run() {
   const projectPackageJson = JSON.parse(fs.readFileSync(projectPackageJsonPath, "utf8"))
   projectPackageJson.name = projectName
   fs.writeFileSync(projectPackageJsonPath, JSON.stringify(projectPackageJson, null, 2) + "\n")
-
-  // Configure yarn to use node-modules linker
-  const yarnConfig = "nodeLinker: node-modules\n"
-  fs.writeFileSync(path.join(targetDir, ".yarnrc.yml"), yarnConfig)
 
   // Install dependencies
   console.log(chalk.cyan("\n🌌 Gathering cosmic dependencies...\n"))
