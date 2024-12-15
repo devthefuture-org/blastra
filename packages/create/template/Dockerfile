@@ -49,8 +49,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Copy built assets from Node.js build
-COPY --from=node-builder --chown=1000:1000 /app/dist ./dist
 COPY --from=node-builder --chown=1000:1000 /app/node_modules ./node_modules
+COPY --from=node-builder --chown=1000:1000 /app/package.json ./package.json
+COPY --from=node-builder --chown=1000:1000 /app/dist ./dist
 
 # Copy Go binary from the Go binary path and ensure it's in PATH
 COPY --from=go-builder /go/bin/blastra-server /usr/local/bin/blastra-server

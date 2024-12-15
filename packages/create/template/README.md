@@ -47,7 +47,7 @@ docker build -t my-blastra-app .
 
 ### Launch into orbit
 ```bash
-docker run -p 8080:8080 my-blastra-app
+docker run -p 8080:8080 -e LOG_LEVEL=debug my-blastra-app
 ```
 
 Your app will be optimized with our Go-powered stellar engine! 🚀
