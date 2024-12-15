@@ -1,6 +1,6 @@
 {
   "name": "@blastra/core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "bin": {
     "blastra": "bin/cli.cjs"

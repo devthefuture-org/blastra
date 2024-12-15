@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.8](https://github.com/devthefuture-org/blastra/compare/v0.0.7...v0.0.8) (2024-12-15)
+
+
+### Bug Fixes
+
+* clean api-demo + fix benchmarks ([20a5233](https://github.com/devthefuture-org/blastra/commit/20a523373fe23168dcd1b16a7f666e4d164b464d))
+* vite compat issue ([322a567](https://github.com/devthefuture-org/blastra/commit/322a567dc32e3f9513aac4559f2d1e3188daf649))
+
 ## [0.0.7](https://github.com/devthefuture-org/blastra/compare/v0.0.6...v0.0.7) (2024-12-15)
 
 
