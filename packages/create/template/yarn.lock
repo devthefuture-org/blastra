@@ -311,9 +311,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blastra/core@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "@blastra/core@npm:0.0.5"
+"@blastra/core@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@blastra/core@npm:0.0.6"
   dependencies:
     "@vitejs/plugin-react": "npm:^4.3.4"
     commander: "npm:^12.1.0"
@@ -325,7 +325,7 @@ __metadata:
     wouter: "npm:^3.0.0"
   bin:
     blastra: bin/cli.cjs
-  checksum: 10c0/aef78838c08ab12fd8a8b9f7b4d10b21acf227ac6b7838c66d558313e7b672a03a0cc759eed683a87fd49c4f637b03b28ab3c3dd1dcb710fa2d81ece1770b841
+  checksum: 10c0/c4461f2f84bfaa6debd697d77ea7d1c588ef288cbcb71f09cc5d0eca85f226466d10a2d639d7074e0b9ed9979a13ca86db337a6ef5b13f2e7c132ba47858f891
   languageName: node
   linkType: hard
 
@@ -1217,7 +1217,7 @@ __metadata:
     "@babel/core": "npm:^7.26.0"
     "@babel/eslint-parser": "npm:^7.25.9"
     "@babel/preset-react": "npm:^7.26.3"
-    "@blastra/core": "npm:^0.0.5"
+    "@blastra/core": "npm:^0.0.6"
     commit-and-tag-version: "npm:^12.5.0"
     eslint: "npm:^9.17.0"
     eslint-config-prettier: "npm:^9.1.0"
