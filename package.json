@@ -1,6 +1,6 @@
 {
   "name": "~blastra-dev",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev:go": "cd pkg && BLASTRA_CPU_LIMIT=4 BLASTRA_RATE_LIMIT=0 BLASTRA_LOG_LEVEL=debug BLASTRA_CWD=../packages/create/template go run main.go",
