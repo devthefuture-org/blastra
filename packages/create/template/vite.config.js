@@ -1,1 +1,1 @@
-export { default } from '@blastra/core/vite.config';
+export { default } from "@blastra/core/vite.config"

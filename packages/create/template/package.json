@@ -10,7 +10,9 @@
     "release": "commit-and-tag-version",
     "release:minor": "yarn release --release-as minor",
     "release:patch": "yarn release --release-as patch",
-    "release:major": "yarn release --release-as major"
+    "release:major": "yarn release --release-as major",
+    "lint": "eslint \"src/**/*.{js,jsx}\" --fix",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx}": [
@@ -25,7 +27,18 @@
     "@blastra/core": "^0.0.5"
   },
   "devDependencies": {
-    "commit-and-tag-version": "^12.5.0"
+    "@babel/core": "^7.26.0",
+    "@babel/eslint-parser": "^7.25.9",
+    "@babel/preset-react": "^7.26.3",
+    "commit-and-tag-version": "^12.5.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "prettier": "^3.4.2"
   },
   "engines": {
     "node": ">=20"
