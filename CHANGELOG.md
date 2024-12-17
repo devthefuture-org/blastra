@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.12](https://github.com/devthefuture-org/blastra/compare/v0.0.11...v0.0.12) (2024-12-17)
+
+
+### Bug Fixes
+
+* default loader ([b8a3fbd](https://github.com/devthefuture-org/blastra/commit/b8a3fbd61de8b5b06664fb63dc1ad3557e0ff15b))
+* template eslint config ([7a5ee58](https://github.com/devthefuture-org/blastra/commit/7a5ee58c63abadab9d72a9e0d1c4b32ed6529317))
+
 ## [0.0.11](https://github.com/devthefuture-org/blastra/compare/v0.0.10...v0.0.11) (2024-12-17)
 
 
