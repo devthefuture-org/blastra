@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.11](https://github.com/devthefuture-org/blastra/compare/v0.0.10...v0.0.11) (2024-12-17)
+
+
+### Bug Fixes
+
+* overridable loader + stylized ([b83de07](https://github.com/devthefuture-org/blastra/commit/b83de07180e8357f11a33bca75c20e1245529bd6))
+
 ## [0.0.10](https://github.com/devthefuture-org/blastra/compare/v0.0.9...v0.0.10) (2024-12-15)
 
 ## [0.0.9](https://github.com/devthefuture-org/blastra/compare/v0.0.8...v0.0.9) (2024-12-15)
