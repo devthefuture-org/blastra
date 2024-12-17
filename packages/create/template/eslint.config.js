@@ -5,10 +5,13 @@ import prettier from "eslint-plugin-prettier"
 import * as parser from "@babel/eslint-parser"
 
 export default [
-  js.configs.recommended,
   {
     files: ["src/**/*.{js,jsx,ts,tsx}"],
-    plugins: { react, "react-hooks": reactHooks, prettier },
+    plugins: {
+      react,
+      "react-hooks": reactHooks,
+      prettier,
+    },
     languageOptions: {
       parser,
       ecmaVersion: 2024,
@@ -53,6 +56,8 @@ export default [
       },
     },
     rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
       "prettier/prettier": "error",
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
