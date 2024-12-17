@@ -294,7 +294,7 @@ All caches have configurable TTL and max size, and can be layered for robust per
 In `@blastra/core`, you'll find custom Vite plugins:
 
 * **`virtual-blastra`** plugin: Provides virtual modules that tie together client and server entry points (`entry-client.jsx` / `entry-server.jsx`) for SSR.
-* **`fallback`** plugin: Fallbacks certain special pages (`_head`, `_404`, etc.) to core defaults if not defined in your project.
+* **`fallback`** plugin: Fallbacks certain special pages (`_head`, `_loader`, `_404`, etc.) to core defaults if not defined in your project.
 
 ### File Server & SSR Execution
 

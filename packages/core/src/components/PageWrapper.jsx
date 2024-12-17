@@ -4,6 +4,8 @@ import { useLocation } from "wouter"
 import { MetaUpdater } from "./MetaUpdater"
 import log from "../utils/clientLogger"
 
+import Loader from "@/pages/_loader"
+
 import Error4xx from "@/pages/_4xx"
 import Error5xx from "@/pages/_5xx"
 import Error404 from "@/pages/_404"
@@ -65,7 +67,7 @@ export default function PageWrapper({ initialData, router, statusCode: initalSta
   }, [location, initialData, getLoader])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   let Component

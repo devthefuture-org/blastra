@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => ({
       alias,
       fallbacks: {
         "@/pages/_head": "@blastra/core/components/Head",
+        "@/pages/_loader": "@blastra/core/components/Loader",
 
         "@/pages/_4xx": "@blastra/core/components/error/4xx",
         "@/pages/_5xx": "@blastra/core/components/error/5xx",

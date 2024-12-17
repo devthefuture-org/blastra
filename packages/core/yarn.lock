@@ -220,6 +220,7 @@ __metadata:
     commander: "npm:^12.1.0"
     express: "npm:^4.21.2"
     serialize-error: "npm:^11.0.3"
+    spinners-react: "npm:^1.0.10"
     vite: "npm:^6.0.3"
     wouter: "npm:^3.0.0"
   peerDependencies:
@@ -2198,6 +2199,18 @@ __metadata:
   version: 1.2.1
   resolution: "source-map-js@npm:1.2.1"
   checksum: 10c0/7bda1fc4c197e3c6ff17de1b8b2c20e60af81b63a52cb32ec5a5d67a20a7d42651e2cb34ebe93833c5a2a084377e17455854fee3e21e7925c64a51b6a52b0faf
+  languageName: node
+  linkType: hard
+
+"spinners-react@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "spinners-react@npm:1.0.10"
+  peerDependencies:
+    "@types/react": ^16.x || ^17.x || ^18.x
+    "@types/react-dom": ^16.x || ^17.x || ^18.x
+    react: ^16.x || ^17.x || ^18.x
+    react-dom: ^16.x || ^17.x || ^18.x
+  checksum: 10c0/49f2e4bec5b592107414e614c97435014191390cab545d9a35572e27c381d280b1450c4d2f4d22575f84763e29d80395ea1b93e4b40dfc8ac459ed8f7d467b57
   languageName: node
   linkType: hard
 
