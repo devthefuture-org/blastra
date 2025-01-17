@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.13](https://github.com/devthefuture-org/blastra/compare/v0.0.12...v0.0.13) (2025-01-17)
+
+
+### Bug Fixes
+
+* data loading race condition on client side navigation ([c71503c](https://github.com/devthefuture-org/blastra/commit/c71503c74665828e64fc49e05a23219f52b1e735))
+
 ## [0.0.12](https://github.com/devthefuture-org/blastra/compare/v0.0.11...v0.0.12) (2024-12-17)
 
 
