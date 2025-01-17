@@ -20,6 +20,7 @@ export default function PageWrapper({ initialData, router, statusCode: initalSta
   const initialRenderDone = useRef(false)
   const lastLocation = useRef(location)
   const [statusCode, setStatusCode] = useState(initalStatusCode)
+  const [currentLocation, setCurrentLocation] = useState(location)
 
   useEffect(() => {
     // Skip data fetch only on the very first render with SSR data
@@ -44,13 +45,15 @@ export default function PageWrapper({ initialData, router, statusCode: initalSta
       loader()
         .then((newData) => {
           log("Received new data:", newData)
-          setData(newData)
           // Update meta with new data
           const metaFn = getMeta(location)
           const newMeta = metaFn(newData)
+          // Update all state at once to prevent race conditions
+          setData(newData)
           setMeta(newMeta)
           setLoading(false)
           setStatusCode(200)
+          setCurrentLocation(location)
           lastLocation.current = location
         })
         .catch((err) => {
@@ -76,7 +79,7 @@ export default function PageWrapper({ initialData, router, statusCode: initalSta
   } else if (statusCode >= 400) {
     Component = Error4xx
   } else {
-    Component = getComponent(location) || Error404
+    Component = getComponent(currentLocation) || Error404
   }
 
   return (
