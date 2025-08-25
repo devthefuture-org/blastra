@@ -44,6 +44,7 @@ Blastra is an **opinionated SSR (Server-Side Rendering) React framework** built 
 * **Isomorphic Data Loading**: Each page can provide a `loader()` function in `data.js` that runs on both server and client, ensuring consistent data fetching with `fetch`.
 * **SEO-First SSR**: Blastra focuses on SSR primarily for SEO. Personalized user logic remains on the client side after hydration.
 * **Hydration Optimization**: Use `fieldsConfig` to avoid duplicating large data (e.g., HTML strings) in both SSR HTML and JSON inline scripts.
+* **Client-only First Paint ("use client")**: Mark modules with `"use client"` to avoid hydration mismatches. SSR renders a stable placeholder during SSR and on the client’s first render, then swaps to the real UI on mount.
 * **Optional High-Performance Go Server**: Build and run your Blastra app on a Go-based SSR server for improved performance.
 * **Docker-Ready**: Built-in Dockerfile and docker-compose integration.
 * **Vite-Based**: Enjoy the speed and simplicity of Vite dev server and the flexible plugin ecosystem.
@@ -250,6 +251,58 @@ This keeps the HTML payload lighter since that large content is not duplicated i
 
 * * *
 
+### Client-only First Paint ("use client")
+
+Blastra supports a Next.js-style `"use client"` directive to gate client-only subtrees on first paint. This avoids hydration mismatches by rendering a minimal, stable placeholder during SSR and on the client’s initial render, and then swapping to the actual component after mount.
+
+**How it’s enabled**
+- The framework ships a Vite plugin that detects `"use client"` at the directive prologue via a Babel AST transform, and wraps the module’s default export with a small runtime helper.
+- The plugin is included in `@blastra/core`’s Vite config; the project template inherits it automatically. No extra configuration is required.
+
+**Authoring**
+- Put `"use client"` at the very top of the module you want gated.
+- The module’s default export is wrapped. Default function/class declarations without a name are converted to named declarations before wrapping.
+
+**Examples**
+```tsx
+// Default arrow component
+"use client"
+export default () => <div>Client only</div>
+```
+
+```tsx
+// Default function declaration
+"use client"
+export default function Widget() {
+  return <div>Client only</div>
+}
+```
+
+```tsx
+// Default class declaration
+"use client"
+export default class Panel extends React.Component {
+  render() { return <div>Client only</div> }
+}
+```
+
+**SSR behavior**
+- During SSR and the client’s first render, a minimal placeholder renders:
+  `<span data-clientonly suppressHydrationWarning />`
+- After mount, the actual component tree replaces the placeholder, ensuring stable, warning-free hydration.
+
+**Data loading**
+- Works independently of `loader()` and `fieldsConfig`. Pass any needed data as props from the page.
+- You can still use `fieldsConfig` to avoid large duplicate payloads; `"use client"` strictly handles first-paint parity.
+
+**Dev/Build and sourcemaps**
+- The transform runs in dev and build for both SSR and client outputs.
+- Sourcemaps are preserved (the plugin feeds Vite’s combined sourcemaps through Babel and emits generator/source maps).
+
+**Scope and guidance**
+- Default export only: only the module’s default export is wrapped. Extensions (e.g., wrapping named exports, custom fallback components) may arrive in a future release.
+- Avoid marking global Head or 4xx/5xx pages as `"use client"` unless you accept the placeholder on first paint.
+
 ## 6. The Optional Go Server
 
 Blastra comes with a **Go-based SSR server** that can serve your production build. Key benefits include:
@@ -295,6 +348,7 @@ In `@blastra/core`, you'll find custom Vite plugins:
 
 * **`virtual-blastra`** plugin: Provides virtual modules that tie together client and server entry points (`entry-client.jsx` / `entry-server.jsx`) for SSR.
 * **`fallback`** plugin: Fallbacks certain special pages (`_head`, `_loader`, `_404`, etc.) to core defaults if not defined in your project.
+* **`useClientGateBabel`** plugin: AST-based transform with a tiny virtual runtime. Detects `"use client"`, injects the helper import, and wraps the default export to guarantee SSR/client first-paint parity (sourcemap-safe; runs in dev + build; applies to client + SSR outputs).
 
 ### File Server & SSR Execution
 
