@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react"
 import { resolve } from "path"
 import virtualBlastra from "@blastra/core/vite-plugins/virtual-blastra"
 import fallback from "@blastra/core/vite-plugins/fallback"
+import { useClientGateBabel } from "./src/vite/useClientGateBabel.js"
 
 const alias = {
   "@": resolve(process.cwd(), "src"),
@@ -25,6 +26,7 @@ export default defineConfig(({ mode }) => ({
         "@/pages/_503": "@blastra/core/components/error/503",
       },
     }),
+    useClientGateBabel(),
     react(),
   ],
   publicDir: "public",
@@ -33,6 +35,7 @@ export default defineConfig(({ mode }) => ({
     include: ["@blastra/core", "react-dom/client", "react-dom"],
   },
   build: {
+    sourcemap: true,
     rollupOptions: {
       input:
         mode === "production"

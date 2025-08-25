@@ -6,6 +6,8 @@
     "blastra": "bin/cli.cjs"
   },
   "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/types": "^7.26.0",
     "@vitejs/plugin-react": "^4.3.4",
     "commander": "^12.1.0",
     "express": "^4.21.2",
@@ -39,5 +41,5 @@
     "render.js",
     "output.js"
   ],
-  "packageManager": "yarn@4.5.3"
+  "packageManager": "yarn@4.9.3"
 }
