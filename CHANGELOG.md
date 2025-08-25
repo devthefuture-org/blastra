@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.14](https://github.com/devthefuture-org/blastra/compare/v0.0.13...v0.0.14) (2025-08-25)
+
+
+### Features
+
+* "use client" + yarn up ([d6751d7](https://github.com/devthefuture-org/blastra/commit/d6751d7295e0784926f9cee64285e020d73126a2))
+
 ## [0.0.13](https://github.com/devthefuture-org/blastra/compare/v0.0.12...v0.0.13) (2025-01-17)
 
 
