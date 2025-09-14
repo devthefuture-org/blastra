@@ -3,7 +3,9 @@ package worker
 import (
 	"bufio"
 	"context"
+	"fmt"
 	"io"
+	"net"
 	"os"
 	"os/exec"
 	"strconv"
@@ -286,19 +288,11 @@ func StartWorkerPoolWithConfig(workerCount int, cwd string, command string, args
 		// stderr tail buffer
 		stderrTail := newRingBuffer(stderrTailLines)
 
-		// Ready detection
-		readyCh := make(chan struct{}, 1)
-		var readyOnce sync.Once
-
 		// Stream stdout
 		go func(p, procPid int, r io.Reader) {
 			scanner := bufio.NewScanner(r)
 			for scanner.Scan() {
 				line := scanner.Text()
-				// readiness token
-				if readyPattern != "" && strings.Contains(line, readyPattern) {
-					readyOnce.Do(func() { readyCh <- struct{}{} })
-				}
 				// optional streaming
 				if streamStdio || log.IsLevelEnabled(log.DebugLevel) {
 					log.WithFields(log.Fields{
@@ -326,25 +320,63 @@ func StartWorkerPoolWithConfig(workerCount int, cwd string, command string, args
 			}
 		}(port, pid, stderrPipe)
 
-		// Optionally wait for readiness (non-fatal on timeout to keep compatibility)
-		if readyPattern != "" && readyTimeout > 0 {
-			select {
-			case <-readyCh:
+		// Wait for TCP readiness and fail on timeout
+		if readyTimeout > 0 {
+			probeInterval := getEnvDuration("BLASTRA_WORKER_PROBE_INTERVAL", 50*time.Millisecond)
+			deadline := time.Now().Add(readyTimeout)
+			ready := false
+			for time.Now().Before(deadline) {
+				conn, err := net.DialTimeout("tcp", "127.0.0.1:"+strconv.Itoa(port), 200*time.Millisecond)
+				if err == nil {
+					conn.Close()
+					ready = true
+					break
+				}
+				time.Sleep(probeInterval)
+			}
+
+			if ready {
 				dur := time.Since(startedAt)
 				log.WithFields(log.Fields{
-					"port":        port,
-					"pid":         pid,
-					"ready_ms":    dur.Milliseconds(),
-					"ready_token": readyPattern,
+					"port":     port,
+					"pid":      pid,
+					"ready_ms": dur.Milliseconds(),
+					"method":   "tcp",
 				}).Info("Worker is ready")
-			case <-time.After(readyTimeout):
+			} else {
+				// Log error, terminate this worker, clean up and fail pool startup
 				log.WithFields(log.Fields{
 					"port":        port,
 					"pid":         pid,
 					"timeout":     readyTimeout.String(),
-					"ready_token": readyPattern,
+					"method":      "tcp",
 					"stderr_tail": strings.Join(stderrTail.snapshot(), "\n"),
-				}).Warn("Worker did not report readiness before timeout")
+				}).Error("Worker readiness TCP check timed out")
+
+				// Try graceful then forceful termination of current process
+				if cmd.Process != nil {
+					_ = cmd.Process.Signal(os.Interrupt)
+					time.Sleep(100 * time.Millisecond)
+					_ = cmd.Process.Kill()
+				}
+				releasePort(port)
+
+				// Stop any previously started workers
+				for _, w := range wp.workers {
+					if w.cmd != nil && w.cmd.Process != nil {
+						_ = w.cmd.Process.Signal(os.Interrupt)
+						time.Sleep(100 * time.Millisecond)
+						_ = w.cmd.Process.Kill()
+					}
+					if w.port > 0 {
+						releasePort(w.port)
+					}
+				}
+
+				// Cancel context to stop any in-flight operations
+				cancel()
+
+				return nil, fmt.Errorf("worker on port %d failed readiness within %s", port, readyTimeout)
 			}
 		}
 

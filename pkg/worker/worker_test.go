@@ -87,6 +87,10 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("single worker", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
 		wp, err := StartWorkerPoolWithCommand(1, ".", mockCmd, nil)
 		if err != nil {
 			t.Fatalf("Failed to create worker pool: %v", err)
@@ -108,6 +112,10 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("multiple workers", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
 		wp, err := StartWorkerPoolWithCommand(3, ".", mockCmd, nil)
 		if err != nil {
 			t.Fatalf("Failed to create worker pool: %v", err)
@@ -134,6 +142,10 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("worker shutdown", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
 		wp, err := StartWorkerPoolWithCommand(1, ".", mockCmd, nil)
 		if err != nil {
 			t.Fatalf("Failed to create worker pool: %v", err)
@@ -171,6 +183,10 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("concurrent access", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
 		wp, err := StartWorkerPoolWithCommand(2, ".", mockCmd, nil)
 		if err != nil {
 			t.Fatalf("Failed to create worker pool: %v", err)
@@ -204,6 +220,10 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("worker process lifecycle", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
 		wp, err := StartWorkerPoolWithCommand(1, ".", mockCmd, nil)
 		if err != nil {
 			t.Fatalf("Failed to create worker pool: %v", err)
@@ -231,6 +251,9 @@ func TestWorkerPool(t *testing.T) {
 	})
 
 	t.Run("worker restart", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "0")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
 		// Start first worker pool
 		wp1, err := StartWorkerPoolWithCommand(1, ".", mockCmd, nil)
 		if err != nil {
@@ -270,6 +293,17 @@ func TestWorkerPool(t *testing.T) {
 
 		if endpoint1 == endpoint2 {
 			t.Error("Expected different endpoints after restart")
+		}
+	})
+
+	t.Run("readiness timeout fails", func(t *testing.T) {
+		prev := os.Getenv("BLASTRA_WORKER_READY_TIMEOUT")
+		os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", "200ms")
+		defer os.Setenv("BLASTRA_WORKER_READY_TIMEOUT", prev)
+
+		_, err := StartWorkerPoolWithCommand(1, ".", mockCmd, nil)
+		if err == nil {
+			t.Fatal("Expected worker pool creation to fail due to readiness timeout")
 		}
 	})
 }

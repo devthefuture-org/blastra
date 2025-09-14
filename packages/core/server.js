@@ -73,9 +73,6 @@ async function createServer() {
   const server = app.listen(port, () => {
     const mode = isProd ? "production" : "development"
     console.log(`Server running at http://localhost:${port} (${mode} mode)`)
-    // Machine-parsable readiness token for the Go worker supervisor
-    // Keep it on a single line for easy detection.
-    console.log(`BLASTRA_READY port=${port} pid=${process.pid} mode=${mode}`)
   })
 
   // Track connections
