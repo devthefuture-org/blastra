@@ -4,6 +4,19 @@ import { resolve } from "path"
 
 import render from "./render.js"
 
+/**
+ * Global process-level error handlers to ensure crashes produce clear logs.
+ */
+process.on("uncaughtException", (err) => {
+  console.error("uncaughtException:", err)
+  // Exit to let supervisor (Go) restart and capture exit code + stderr tail
+  process.exit(1)
+})
+process.on("unhandledRejection", (reason) => {
+  console.error("unhandledRejection:", reason)
+  process.exit(1)
+})
+
 async function createServer() {
   const app = express()
   const isProd = process.env.NODE_ENV === "production"
@@ -58,9 +71,11 @@ async function createServer() {
 
   // Create HTTP server instance
   const server = app.listen(port, () => {
-    console.log(
-      `Server running at http://localhost:${port} (${isProd ? "production" : "development"} mode)`
-    )
+    const mode = isProd ? "production" : "development"
+    console.log(`Server running at http://localhost:${port} (${mode} mode)`)
+    // Machine-parsable readiness token for the Go worker supervisor
+    // Keep it on a single line for easy detection.
+    console.log(`BLASTRA_READY port=${port} pid=${process.pid} mode=${mode}`)
   })
 
   // Track connections
